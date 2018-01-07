@@ -32,6 +32,7 @@ public class SinSet extends Fragment {
     private SeekBar mSeekBar;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
+    RelativeLayout rl;
     private String background_color;
     View mView;
     @Override
@@ -43,8 +44,53 @@ public class SinSet extends Fragment {
         mSeekBar = mView.findViewById(R.id.brightness_control_sb_3);
         radioGroup = mView.findViewById(R.id.radioGroup);
         background_color = "yellow";
+        rl = mView.findViewById(R.id.root);
         int brightness = getScreenBrightness();
         mSeekBar.setProgress(brightness);
+
+        SharedPreferences prefs = getActivity().getSharedPreferences("settings_fragment", MODE_PRIVATE);
+        String mute = prefs.getString("mute", "no");
+        int lol = prefs.getInt("brightness", -1);
+        String color = prefs.getString("color", "no");
+
+        if(lol != -1){
+            setScreenBrightness(lol);
+        }
+
+        if(mute.equals("OFF")){
+            AudioManager audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
+            audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+        }
+
+        if (mute.equals("ON")){
+            AudioManager audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
+            audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+            mToggleButton.setChecked(true);
+        }
+
+        switch(color){
+            case "yellow":
+                background_color = "yellow";
+                radioButton = mView.findViewById(R.id.black_rb_3);
+                radioButton.setChecked(true);
+                rl.setBackgroundResource(R.color.yellow);
+                break;
+            case "green":
+                background_color = "green";
+                radioButton = mView.findViewById(R.id.green_rb_3);
+                radioButton.setChecked(true);
+                rl.setBackgroundResource(R.color.green);
+                break;
+            case "purple":
+                background_color = "purple";
+                radioButton = mView.findViewById(R.id.purple_rb_3);
+                radioButton.setChecked(true);
+                rl.setBackgroundResource(R.color.purple);
+                break;
+            default:
+                break;
+        }
+
         return mView;
     }
 
@@ -55,7 +101,7 @@ public class SinSet extends Fragment {
         mToggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                NotificationManager notificationManager = (NotificationManager) getActivity() .getSystemService(Context.NOTIFICATION_SERVICE);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !notificationManager.isNotificationPolicyAccessGranted()) {
 
                     Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
@@ -105,8 +151,6 @@ public class SinSet extends Fragment {
 
             }
         });
-
-        final RelativeLayout rl = mView.findViewById(R.id.root);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
