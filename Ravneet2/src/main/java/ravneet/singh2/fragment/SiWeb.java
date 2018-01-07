@@ -58,17 +58,16 @@ public class SiWeb extends Fragment {
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
-                        JsonObjectRequest request = new JsonObjectRequest("http://api.zippopotam.us/us/" +
-                                mEditText.getText().toString(),
+                        JsonObjectRequest request = new JsonObjectRequest("https://www.zipwise.com/webservices/zipinfo.php?key=xeet1pvj0w5ntz39&zip="
+                                + mEditText.getText().toString() + "&format=json",
                                 new Response.Listener<JSONObject>(){
 
                                     @Override
                                     public void onResponse(JSONObject response) {
                                         try {
-                                            cityTV.setText(response.getJSONObject("results").getString("state"));
-                                            Toast.makeText(getActivity(), cityTV.getText().toString(), Toast.LENGTH_SHORT).show();
-//                                            stateTV.setText(response.getJSONArray("results").getJSONObject(0).getString("state"));
-//                                            codeTV.setText(response.getJSONArray("results").getJSONObject(0).getString("area_code"));
+                                            cityTV.setText(response.getJSONObject("results").getJSONArray("cities").getJSONObject(0).getString("city"));
+                                            stateTV.setText(response.getJSONObject("results").getString("state"));
+                                            codeTV.setText(response.getJSONObject("results").getString("area_code"));
 
                                         } catch (JSONException e) {
                                             Toast.makeText(getActivity(), "dfhsbdfhg", Toast.LENGTH_SHORT).show();
