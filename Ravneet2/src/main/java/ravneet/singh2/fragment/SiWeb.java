@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -57,17 +58,20 @@ public class SiWeb extends Fragment {
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
-                        JsonObjectRequest request = new JsonObjectRequest("http://api.zippopotam.us/us/95210" +
+                        JsonObjectRequest request = new JsonObjectRequest("http://api.zippopotam.us/us/" +
                                 mEditText.getText().toString(),
                                 new Response.Listener<JSONObject>(){
 
                                     @Override
                                     public void onResponse(JSONObject response) {
-
-                                        String location = null;
                                         try {
-                                            location = response.getJSONArray("results").getJSONObject(0).getString("formatted_address");
+                                            cityTV.setText(response.getJSONObject("results").getString("state"));
+                                            Toast.makeText(getActivity(), cityTV.getText().toString(), Toast.LENGTH_SHORT).show();
+//                                            stateTV.setText(response.getJSONArray("results").getJSONObject(0).getString("state"));
+//                                            codeTV.setText(response.getJSONArray("results").getJSONObject(0).getString("area_code"));
+
                                         } catch (JSONException e) {
+                                            Toast.makeText(getActivity(), "dfhsbdfhg", Toast.LENGTH_SHORT).show();
                                             e.printStackTrace();
                                         }
 
