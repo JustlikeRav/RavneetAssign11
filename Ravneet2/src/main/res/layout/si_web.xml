@@ -2,12 +2,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ravneet.singh2.fragment.SiWeb">
+    tools:context="ravneet.singh2.fragment.SiWeb"
+    android:background="@color/colorPrimary">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/tv3Singh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Singh"
+        android:layout_centerInParent="true"/>
+
+    <EditText
+        android:id="@+id/zip_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberPassword"
+        android:layout_centerInParent="true"
+        android:hint="Enter ZIP code"
+        android:maxLength="5"
+        android:layout_below="@+id/tv3Singh"/>
+
+    <Button
+        android:id="@+id/webservice_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Web Services"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/zip_et"/>
+
+    <TextView
+        android:id="@+id/address_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="City: "/>
+
 
 </RelativeLayout>
