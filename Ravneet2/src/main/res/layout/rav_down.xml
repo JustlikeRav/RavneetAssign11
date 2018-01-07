@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ravneet.singh2.fragment.RavDown"
+    android:background="@color/colorAccent">
+
+    <TextView
+        android:id="@+id/tv2Ravneet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ravneet Singh"
+        android:layout_centerInParent="true"/>
+
+    <Button
+        android:id="@+id/download_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="download image"
+        android:layout_below="@+id/tv2Ravneet"
+        android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:id="@+id/downloaded_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_above="@+id/tv2Ravneet"/>
+
+</RelativeLayout>
